@@ -2,7 +2,7 @@
     width: max-content;
     height: max-content;
     padding: 30px;
-    background-color: rgba(17, 25, 40, 0.5);
+    background-color: rgba(17, 25, 40, 0.657);
     border-radius: 10px;
     position: absolute;
     top: 0;
@@ -43,6 +43,14 @@
                 border-radius: 50%;
                 object-fit: cover;
             }
+        }
+        button {
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
     }
 }
