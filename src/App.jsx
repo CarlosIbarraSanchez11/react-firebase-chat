@@ -9,19 +9,24 @@ import { auth } from "./lib/firebase";
 import { useUserStore } from "./lib/userStore";
 
 const App = () => {
-  // const user = false;
-  const {currentUser, isLoading, fetchUserInfo} = useUserStore()
-  useEffect(()=>{
-    const unSub = onAuthStateChanged(auth, (user) =>{
-      // console.log(user.uid);
-      fetchUserInfo(user.uid)
-    });
-    return () =>{
-      unSub();
-    }
-  },[fetchUserInfo]);
+  const { currentUser, isLoading, fetchUserInfo } = useUserStore();
 
-  console.log(currentUser)
+  useEffect(() => {
+    const unSub = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        fetchUserInfo(user.uid);
+      } else {
+        // Handle the case when the user is logged out or not authenticated
+        fetchUserInfo(null);
+      }
+    });
+
+    return () => {
+      unSub();
+    };
+  }, [fetchUserInfo]);
+
+  console.log(currentUser);
 
   if(isLoading) return <div className="loading">Loading...</div>
 
